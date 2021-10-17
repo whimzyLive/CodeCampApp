@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCampApp.API", "CodeCampApp.API\CodeCampApp.API.csproj", "{6E7B7898-58B9-48A4-B758-E2BDEEA9D003}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeCampApp.API", "CodeCampApp.API\CodeCampApp.API.csproj", "{6E7B7898-58B9-48A4-B758-E2BDEEA9D003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCampApp.Domain", "CodeCampApp.Domain\CodeCampApp.Domain.csproj", "{6D28E946-5493-4CF3-9FC5-E1C4AB279F1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCampApp.Data", "CodeCampApp.Data\CodeCampApp.Data.csproj", "{1747987B-1C2F-42F6-B1B8-4490F98FE2D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6E7B7898-58B9-48A4-B758-E2BDEEA9D003}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E7B7898-58B9-48A4-B758-E2BDEEA9D003}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E7B7898-58B9-48A4-B758-E2BDEEA9D003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D28E946-5493-4CF3-9FC5-E1C4AB279F1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D28E946-5493-4CF3-9FC5-E1C4AB279F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D28E946-5493-4CF3-9FC5-E1C4AB279F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D28E946-5493-4CF3-9FC5-E1C4AB279F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1747987B-1C2F-42F6-B1B8-4490F98FE2D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1747987B-1C2F-42F6-B1B8-4490F98FE2D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1747987B-1C2F-42F6-B1B8-4490F98FE2D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1747987B-1C2F-42F6-B1B8-4490F98FE2D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
