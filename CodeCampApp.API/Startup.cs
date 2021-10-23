@@ -22,9 +22,9 @@ namespace CodeCampApp.API
         {
 
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<CampsContext>();
             services.AddScoped<ICampRepository, CampsRepository>();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CodeCampApp.API", Version = "v1" });
