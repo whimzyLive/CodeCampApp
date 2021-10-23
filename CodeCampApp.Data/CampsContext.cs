@@ -1,7 +1,7 @@
 ﻿using CodeCampApp.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
+using System;
 
 namespace CodeCampApp.Data
 {
@@ -21,6 +21,13 @@ namespace CodeCampApp.Data
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer(this.config.GetConnectionString("CodeCamp"));
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Camp>()
+                .HasData((new Camp { CampId = 1, EventDate = DateTime.Now, Name = "Atlanta 2021", Length = 15, Moniker = "ATL2021" }));
         }
     }
 }

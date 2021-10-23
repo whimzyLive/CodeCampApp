@@ -4,14 +4,16 @@ using CodeCampApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeCampApp.Data.Migrations
 {
     [DbContext(typeof(CampsContext))]
-    partial class CampsContextModelSnapshot : ModelSnapshot
+    [Migration("20211023081417_auto-increment-camp-id")]
+    partial class autoincrementcampid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,16 +48,6 @@ namespace CodeCampApp.Data.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Camps");
-
-                    b.HasData(
-                        new
-                        {
-                            CampId = 1,
-                            EventDate = new DateTime(2021, 10, 23, 19, 1, 56, 382, DateTimeKind.Local).AddTicks(194),
-                            Length = 15,
-                            Moniker = "ATL2021",
-                            Name = "Atlanta 2021"
-                        });
                 });
 
             modelBuilder.Entity("CodeCampApp.Domain.Location", b =>

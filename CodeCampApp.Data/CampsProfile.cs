@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using CodeCampApp.Domain;
-using System;
 
 namespace CodeCampApp.Data
 {

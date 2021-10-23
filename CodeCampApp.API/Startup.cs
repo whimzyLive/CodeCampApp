@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Reflection;
 
 namespace CodeCampApp.API
 {
@@ -22,7 +24,7 @@ namespace CodeCampApp.API
         {
 
             services.AddControllers();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<CampsContext>();
             services.AddScoped<ICampRepository, CampsRepository>();
             services.AddSwaggerGen(c =>

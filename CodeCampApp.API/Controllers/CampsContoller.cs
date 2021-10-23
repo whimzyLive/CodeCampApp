@@ -28,8 +28,9 @@ namespace CodeCampApp.API.Controllers
                 var camps = await this.repository.GetAllCampsAsync();
                 return this.mapper.Map<CampModel[]>(camps);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Something went wrong");
             }
         }
