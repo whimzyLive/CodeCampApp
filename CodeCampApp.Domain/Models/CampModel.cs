@@ -8,5 +8,6 @@ namespace CodeCampApp.Domain
         public string Name { get; set; }
         public string Moniker { get; set; }
         public DateTime EventDate { get; set; } = DateTime.MinValue;
+        public string Venue { get; set; }
     }
 }

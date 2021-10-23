@@ -4,14 +4,16 @@ using CodeCampApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeCampApp.Data.Migrations
 {
     [DbContext(typeof(CampsContext))]
-    partial class CampsContextModelSnapshot : ModelSnapshot
+    [Migration("20211023103507_seed-camp-location")]
+    partial class seedcamplocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

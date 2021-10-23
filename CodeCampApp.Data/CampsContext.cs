@@ -20,14 +20,29 @@ namespace CodeCampApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(this.config.GetConnectionString("CodeCamp"));
+            builder.UseSqlServer(this.config.GetConnectionString("CodeCamp"))
+                .EnableSensitiveDataLogging();
         }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Location>().HasData(new Location
+            {
+                VenueName = "BOgi oiid",
+                LocationId = 1
+            });
+
             modelBuilder.Entity<Camp>()
-                .HasData((new Camp { CampId = 1, EventDate = DateTime.Now, Name = "Atlanta 2021", Length = 15, Moniker = "ATL2021" }));
+                .HasData(new
+                {
+                    CampId = 1,
+                    EventDate = DateTime.Now,
+                    Name = "Atlanta 2021",
+                    Length = 15,
+                    Moniker = "ATL2021",
+                    LocationId = 1
+                });
         }
     }
 }

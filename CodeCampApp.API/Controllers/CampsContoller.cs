@@ -28,11 +28,30 @@ namespace CodeCampApp.API.Controllers
                 var camps = await this.repository.GetAllCampsAsync();
                 return this.mapper.Map<CampModel[]>(camps);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Something went wrong");
             }
+        }
+
+        [HttpGet("{moniker}")]
+        public async Task<ActionResult<CampModel>> GetCampByMoniker(string moniker)
+        {
+            try
+            {
+                var result = await this.repository.GetCampAsync(moniker);
+
+                if (result == null)
+                {
+                    return NotFound(new { Message = "No such Camp.." });
+                }
+                return this.mapper.Map<CampModel>(result);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Could to get camp {moniker}");
+            }
+
         }
     }
 }

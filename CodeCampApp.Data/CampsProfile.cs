@@ -7,7 +7,8 @@ namespace CodeCampApp.Data
     {
         public CampsProfile()
         {
-            this.CreateMap<Camp, CampModel>();
+            this.CreateMap<Camp, CampModel>()
+                .ForMember(camp => camp.Venue, opt => opt.MapFrom(c => c.Location.VenueName));
         }
     }
 }
