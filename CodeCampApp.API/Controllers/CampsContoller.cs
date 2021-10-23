@@ -21,11 +21,11 @@ namespace CodeCampApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<CampModel[]>> Get()
+        public async Task<ActionResult<CampModel[]>> Get(bool includeTalks = false)
         {
             try
             {
-                var camps = await this.repository.GetAllCampsAsync();
+                var camps = await this.repository.GetAllCampsAsync(includeTalks);
                 return this.mapper.Map<CampModel[]>(camps);
             }
             catch (Exception)
@@ -35,11 +35,11 @@ namespace CodeCampApp.API.Controllers
         }
 
         [HttpGet("{moniker}")]
-        public async Task<ActionResult<CampModel>> GetCampByMoniker(string moniker)
+        public async Task<ActionResult<CampModel>> GetCampByMoniker(string moniker, bool includeTalks = false)
         {
             try
             {
-                var result = await this.repository.GetCampAsync(moniker);
+                var result = await this.repository.GetCampAsync(moniker, includeTalks);
 
                 if (result == null)
                 {
@@ -47,9 +47,9 @@ namespace CodeCampApp.API.Controllers
                 }
                 return this.mapper.Map<CampModel>(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Could to get camp {moniker}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get camp {moniker}");
             }
 
         }

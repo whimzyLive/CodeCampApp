@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CodeCampApp.Domain
 {
@@ -9,5 +10,6 @@ namespace CodeCampApp.Domain
         public string Moniker { get; set; }
         public DateTime EventDate { get; set; } = DateTime.MinValue;
         public string Venue { get; set; }
+        public ICollection<TalkModel> Talks { get; set; }
     }
 }

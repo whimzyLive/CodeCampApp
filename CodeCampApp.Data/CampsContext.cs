@@ -43,6 +43,49 @@ namespace CodeCampApp.Data
                     Moniker = "ATL2021",
                     LocationId = 1
                 });
+
+            modelBuilder.Entity<Talk>()
+            .HasData(new
+            {
+                TalkId = 1,
+                CampId = 1,
+                SpeakerId = 1,
+                Title = "Entity Framework From Scratch",
+                Abstract = "Entity Framework from scratch in an hour. Probably cover it all",
+                Level = 100
+            },
+            new
+            {
+                TalkId = 2,
+                CampId = 1,
+                SpeakerId = 2,
+                Title = "Writing Sample Data Made Easy",
+                Abstract = "Thinking of good sample data examples is tiring.",
+                Level = 200
+            });
+
+            modelBuilder.Entity<Speaker>()
+            .HasData(new
+            {
+                SpeakerId = 1,
+                FirstName = "Shawn",
+                LastName = "Wildermuth",
+                BlogUrl = "http://wildermuth.com",
+                Company = "Wilder Minds LLC",
+                CompanyUrl = "http://wilderminds.com",
+                GitHub = "shawnwildermuth",
+                Twitter = "shawnwildermuth"
+            }, new
+            {
+                SpeakerId = 2,
+                FirstName = "Resa",
+                LastName = "Wildermuth",
+                BlogUrl = "http://shawnandresa.com",
+                Company = "Wilder Minds LLC",
+                CompanyUrl = "http://wilderminds.com",
+                GitHub = "resawildermuth",
+                Twitter = "resawildermuth"
+            });
         }
     }
 }
