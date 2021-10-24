@@ -47,7 +47,7 @@ namespace CodeCampApp.API.Controllers
                 }
                 return this.mapper.Map<CampModel>(result);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get camp {moniker}");
             }
