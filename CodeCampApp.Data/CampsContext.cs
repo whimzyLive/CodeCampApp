@@ -7,11 +7,11 @@ namespace CodeCampApp.Data
 {
     public class CampsContext : DbContext
     {
-        private readonly IConfiguration config;
+        private readonly IConfiguration _config;
 
         public CampsContext(DbContextOptions<CampsContext> options, IConfiguration config) : base(options)
         {
-            this.config = config;
+            _config = config;
         }
 
         public DbSet<Camp> Camps { get; set; }
@@ -20,7 +20,7 @@ namespace CodeCampApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(this.config.GetConnectionString("CodeCamp"))
+            builder.UseSqlServer(_config.GetConnectionString("CodeCamp"))
                 .EnableSensitiveDataLogging();
         }
 

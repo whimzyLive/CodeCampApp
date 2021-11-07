@@ -9,26 +9,26 @@ namespace CodeCampApp.Data
 {
     public class CampsRepository : ICampRepository
     {
-        private readonly CampsContext context;
+        private readonly CampsContext _context;
 
         public CampsRepository(CampsContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public void Add<T>(T entity) where T : class
         {
-            this.context.Add(entity);
+            _context.Add(entity);
         }
 
         public void Delete<T>(T entity) where T : class
         {
-            this.context.Remove(entity);
+            _context.Remove(entity);
         }
 
         public Task<Camp[]> GetAllCampsAsync(bool includeTalks = false)
         {
-            IQueryable<Camp> query = this.context.Camps
+            IQueryable<Camp> query = _context.Camps
                 .Include(camp => camp.Location);
 
             if (includeTalks)
@@ -43,7 +43,7 @@ namespace CodeCampApp.Data
 
         public Task<Camp[]> GetAllCampsByEventDate(DateTime dateTime, bool includeTalks = false)
         {
-            IQueryable<Camp> query = this.context.Camps
+            IQueryable<Camp> query = _context.Camps
                 .Include(camp => camp.Location);
 
             if (includeTalks)
@@ -59,14 +59,14 @@ namespace CodeCampApp.Data
 
         public Task<Speaker[]> GetAllSpeakersAsync()
         {
-            return this.context.Speakers
+            return _context.Speakers
                 .OrderBy(speaker => speaker.LastName)
                 .ToArrayAsync();
         }
 
         public Task<Camp> GetCampAsync(string moniker, bool includeTalks = false)
         {
-            IQueryable<Camp> query = this.context.Camps
+            IQueryable<Camp> query = _context.Camps
                 .Include(camp => camp.Location);
 
             if (includeTalks)
@@ -81,7 +81,7 @@ namespace CodeCampApp.Data
 
         public Task<Speaker> GetSpeakerAsync(int speakerId)
         {
-            var query = this.context.Speakers
+            var query = _context.Speakers
                 .Where(speaker => speaker.SpeakerId == speakerId);
 
             return query.FirstOrDefaultAsync();
@@ -89,7 +89,7 @@ namespace CodeCampApp.Data
 
         public Task<Speaker[]> GetSpeakersByMonikerAsync(string moniker)
         {
-            IQueryable<Speaker> query = this.context.Talks
+            IQueryable<Speaker> query = _context.Talks
                 .Where(talk => talk.Camp.Moniker == moniker)
                 .Select(talk => talk.Speaker)
                 .Where(speaker => speaker != null)
@@ -101,7 +101,7 @@ namespace CodeCampApp.Data
 
         public Task<Talk> GetTalkByMonikerAsync(string moniker, int talkId, bool includeSpeakers = false)
         {
-            IQueryable<Talk> query = this.context.Talks;
+            IQueryable<Talk> query = _context.Talks;
             if (includeSpeakers)
             {
                 query = query
@@ -116,7 +116,7 @@ namespace CodeCampApp.Data
 
         public Task<Talk[]> GetTalksByMonikerAsync(string moniker, bool includeSpeakers = false)
         {
-            IQueryable<Talk> query = this.context.Talks;
+            IQueryable<Talk> query = _context.Talks;
 
             if (includeSpeakers)
             {
@@ -133,7 +133,7 @@ namespace CodeCampApp.Data
 
         public async Task<bool> SaveChangesAsync()
         {
-            return (await this.context.SaveChangesAsync()) > 0;
+            return (await _context.SaveChangesAsync()) > 0;
         }
     }
 }

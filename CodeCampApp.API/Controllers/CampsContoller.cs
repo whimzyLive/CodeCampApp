@@ -13,15 +13,15 @@ namespace CodeCampApp.API.Controllers
     [ApiController]
     public class CampsController : ControllerBase
     {
-        private readonly ICampRepository repository;
-        private readonly IMapper mapper;
-        private readonly LinkGenerator linkGenerator;
+        private readonly ICampRepository _repository;
+        private readonly IMapper _mapper;
+        private readonly LinkGenerator _linkGenerator;
 
         public CampsController(ICampRepository repository, IMapper mapper, LinkGenerator linkGenerator)
         {
-            this.repository = repository;
-            this.mapper = mapper;
-            this.linkGenerator = linkGenerator;
+            _repository = repository;
+            _mapper = mapper;
+            _linkGenerator = linkGenerator;
         }
 
         [HttpGet]
@@ -29,12 +29,12 @@ namespace CodeCampApp.API.Controllers
         {
             try
             {
-                var camps = await this.repository.GetAllCampsAsync(includeTalks);
-                return this.mapper.Map<CampModel[]>(camps);
+                var camps = await _repository.GetAllCampsAsync(includeTalks);
+                return _mapper.Map<CampModel[]>(camps);
             }
             catch (Exception)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Something went wrong");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Something went wrong");
             }
         }
 
@@ -43,17 +43,17 @@ namespace CodeCampApp.API.Controllers
         {
             try
             {
-                var result = await this.repository.GetCampAsync(moniker, includeTalks);
+                var result = await _repository.GetCampAsync(moniker, includeTalks);
 
                 if (result == null)
                 {
                     return NotFound(new { Message = "No such Camp.." });
                 }
-                return this.mapper.Map<CampModel>(result);
+                return _mapper.Map<CampModel>(result);
             }
             catch (Exception)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get camp {moniker}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get camp {moniker}");
             }
 
         }
@@ -61,20 +61,20 @@ namespace CodeCampApp.API.Controllers
         [HttpPost]
         public async Task<ActionResult<CampModel>> Post(CampModel model)
         {
-            string location = this.linkGenerator.GetPathByAction("GetCampByMoniker", "Camps", new { moniker = model.Moniker });
+            string location = _linkGenerator.GetPathByAction("GetCampByMoniker", "Camps", new { moniker = model.Moniker });
             try
             {
-                var camp = this.mapper.Map<Camp>(model);
-                this.repository.Add(camp);
-                if (await this.repository.SaveChangesAsync())
+                var camp = _mapper.Map<Camp>(model);
+                _repository.Add(camp);
+                if (await _repository.SaveChangesAsync())
                 {
-                    return Created(location, this.mapper.Map<CampModel>(camp));
+                    return Created(location, _mapper.Map<CampModel>(camp));
                 }
                 return BadRequest("Cloud not create Camp");
             }
             catch (Exception e)
             {
-                return this.StatusCode(500, "Something went wrong");
+                return StatusCode(500, "Something went wrong");
             }
         }
     }
