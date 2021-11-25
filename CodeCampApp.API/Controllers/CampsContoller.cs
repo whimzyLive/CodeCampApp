@@ -1,4 +1,5 @@
 using AutoMapper;
+using CodeCampApp.API.Services;
 using CodeCampApp.Data;
 using CodeCampApp.Domain;
 using Microsoft.AspNetCore.Http;
@@ -16,12 +17,14 @@ namespace CodeCampApp.API.Controllers
         private readonly ICampRepository _repository;
         private readonly IMapper _mapper;
         private readonly LinkGenerator _linkGenerator;
+        private readonly IPublisher _publisher;
 
-        public CampsController(ICampRepository repository, IMapper mapper, LinkGenerator linkGenerator)
+        public CampsController(ICampRepository repository, IMapper mapper, LinkGenerator linkGenerator, IPublisher publiser)
         {
             _repository = repository;
             _mapper = mapper;
             _linkGenerator = linkGenerator;
+            _publisher = publiser;
         }
 
         [HttpGet]
@@ -76,6 +79,20 @@ namespace CodeCampApp.API.Controllers
             {
                 return StatusCode(500, "Something went wrong");
             }
+        }
+
+
+        [HttpPost("Notify")]
+        public ActionResult<OkResult> Notify()
+        {
+            Subscriber sub1 = new("Subscriber 1");
+            Subscriber sub2 = new("Subscriber 2");
+
+            _publisher.OnChange += sub1.Update;
+            _publisher.OnChange += sub2.Update;
+
+            _publisher.Notify();
+            return Ok();
         }
     }
 }

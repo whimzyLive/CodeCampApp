@@ -1,3 +1,4 @@
+using CodeCampApp.API.Services;
 using CodeCampApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,7 @@ namespace CodeCampApp.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<CampsContext>();
             services.AddScoped<ICampRepository, CampsRepository>();
+            services.AddScoped<IPublisher, Publisher>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CodeCampApp.API", Version = "v1" });
