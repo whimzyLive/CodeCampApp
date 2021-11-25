@@ -4,8 +4,8 @@ namespace CodeCampApp.API.Services
 {
     public interface IPublisher
     {
-        event Action OnChange;
+        event EventHandler<CustomEvent> OnChange;
 
-        void Notify();
+        void Notify(CustomEvent e);
     }
 }

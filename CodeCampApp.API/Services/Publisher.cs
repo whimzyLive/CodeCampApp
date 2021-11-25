@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 
 namespace CodeCampApp.API.Services
 {
+
     public class Publisher : IPublisher
     {
-        public event Action OnChange = delegate { };
+        public event EventHandler<CustomEvent> OnChange = delegate { };
 
-        public void Notify()
+        public void Notify(CustomEvent e)
         {
-            OnChange?.Invoke();
+            OnChange(this, e);
         }
     }
 }

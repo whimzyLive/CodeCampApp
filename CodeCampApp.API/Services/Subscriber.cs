@@ -14,9 +14,10 @@ namespace CodeCampApp.API.Services
 
         }
 
-        public void Update()
+        public void Update(Object sender, CustomEvent e)
         {
             Console.WriteLine($"Message received by {_name}");
+            Console.WriteLine($"{_name} is notified about the event: {e.Message}");
         }
     }
 }

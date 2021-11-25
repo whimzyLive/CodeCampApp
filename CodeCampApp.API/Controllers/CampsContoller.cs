@@ -83,15 +83,16 @@ namespace CodeCampApp.API.Controllers
 
 
         [HttpPost("Notify")]
-        public ActionResult<OkResult> Notify()
+        public IActionResult Notify()
         {
             Subscriber sub1 = new("Subscriber 1");
             Subscriber sub2 = new("Subscriber 2");
 
-            _publisher.OnChange += sub1.Update;
-            _publisher.OnChange += sub2.Update;
+            _publisher.OnChange += (sender, e) => sub1.Update(sender, e);
+            _publisher.OnChange += (sender, e) => sub2.Update(sender, e);
 
-            _publisher.Notify();
+            _publisher.Notify(new CustomEvent("Time to go home."));
+
             return Ok();
         }
     }
